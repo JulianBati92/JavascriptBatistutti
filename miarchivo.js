@@ -12,7 +12,6 @@ mostrarProducto() {
     `Este ${this.modelo} ${this.mate} y el precio es $${this.precio}`
   );
 }
-}
 
 let listaDeProductos = [
      {id:1, mate: "completo", modelo: "set", precio: 1000, stock:3}, 
