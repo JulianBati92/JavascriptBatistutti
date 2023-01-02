@@ -1,38 +1,3 @@
-function saludar() {
-  let nombre = prompt('¿Cuál es tu nombre?');
-  let apellido = prompt('¿Cuál es tu apellido?');
-
-  alert(`Hola ${nombre} ${apellido}, ¿tomamos unos mates?`);
-
-  let entrada = prompt('Ingresar tus redes sociales');
-
-       while (true) {
-         if (!entrada) {
-         break;
-      }
-
-    switch (entrada) {
-      case "instagram.com/":
-        alert("Gracias por ingresar tu instagram, tienes un 20% de descuento ingresando el código MATTEOLIIG en la tienda online");
-        return;
-      case "facebook.com/":
-        alert("Gracias por ingresar tu facebook, tienes un 20% de descuento ingresando el código MATTEOLIFB en la tienda online");
-        return;
-      default:
-        if (entrada.includes(".")) {
-          alert("Gracias por ingresar tu red social, tienes un 10% de descuento ingresando el código MATTEOLI en la tienda online");
-        } else {
-          alert("Gracias por tu tiempo!!!")
-        }
-        return;
-    }
-
-    entrada = prompt("Ingresar tus redes sociales");
-  }
-}
-
-saludar();
-
 
 class Producto {
   constructor(mate, modelo, precio, stock) {
@@ -50,9 +15,9 @@ mostrarProducto() {
 }
 
 let listaDeProductos = [
-     {id:1, mate: "set completo", modelo: "set", precio: 1000, stock:3}, 
-     {id:2, mate: "plata 925 crem", modelo: "imperial", precio: 2850, stock: 8}, 
-     {id:3, mate: "plata 925 blanco", modelo: "imperial", precio: 2600, stock: 15}, 
+     {id:1, mate: "completo", modelo: "set", precio: 1000, stock:3}, 
+     {id:2, mate: "crem", modelo: "imperial plata", precio: 2850, stock: 8}, 
+     {id:3, mate: "blanco", modelo: "imperial plata", precio: 2600, stock: 15}, 
      {id:4, mate: "rosalia", modelo: "imperial", precio: 2500, stock:10}, 
      {id:5, mate: "beige", modelo: "torpedo", precio: 2200, stock: 22}, 
      {id:6, mate: "blanco", modelo: "imperial", precio: 2500, stock: 7}, 
