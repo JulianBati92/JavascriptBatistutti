@@ -28,7 +28,8 @@ let listaDeProductos = [
 ];
 
 listaDeProductos.forEach((producto) => {
-  producto.mostrarProducto();
+  let productoHtml = producto.mostrarProducto();
+  document.getElementById('productos').innerHTML += productoHtml;
 });
 
 let busquedaUsuario = prompt("¿Qué modelo queres buscar?");
@@ -52,7 +53,7 @@ let productosAgregados = [];
 document.addEventListener("DOMContentLoaded", () => {
   productosAgregados = JSON.parse(localStorage.getItem('productos')) || [];
 
-  let crearProductoBoton = document.getElementById("crearProductoBoton");
+  let crearProductoBoton = document.getElementById("formulario");
   crearProductoBoton.addEventListener("click", (event) => {
     event.preventDefault();
     crearProducto();
@@ -69,6 +70,7 @@ function crearProducto() {
   let mateInput = document.getElementById("mate");
   let modeloInput = document.getElementById("modelo");
   let precioInput = document.getElementById("precio");
+  let stockInput = document.getElementById("stock");
 
   let nuevoProducto = new Producto(mateInput.value, modeloInput.value, precioInput.value);
   productosAgregados.push(nuevoProducto);
