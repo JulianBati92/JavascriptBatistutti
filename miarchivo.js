@@ -50,17 +50,16 @@ mostrarProducto() {
 }
 
 let listaDeProductos = [
-  new Producto("set completo", "set", 1000, 3),
-  new Producto("plata 925 crem", "imperial", 2850, 8),
-  new Producto("plata 925 blanco", "imperial", 2600, 15),
-  new Producto("plata 925 blanco", "imperial", 2600, 15),
-  new Producto("rosalia", "imperial", 2500, 10),
-  new Producto("beige", "torpedo", 2200, 22),
-  new Producto("blanco", "imperial", 2500, 7),
-  new Producto("cream", "camionero", 2300, 18),
-  new Producto("negro", "imperial", 2500, 1),
-  new Producto("alpaca", "bombilla", 1900, 23),
-  new Producto("acero", "bombilla", 1500, 40),
+     {id:1, mate: "set completo", modelo: "set", precio: 1000, stock:3}, 
+     {id:2, mate: "plata 925 crem", modelo: "imperial", precio: 2850, stock: 8}, 
+     {id:3, mate: "plata 925 blanco", modelo: "imperial", precio: 2600, stock: 15}, 
+     {id:4, mate: "rosalia", modelo: "imperial", precio: 2500, stock:10}, 
+     {id:5, mate: "beige", modelo: "torpedo", precio: 2200, stock: 22}, 
+     {id:6, mate: "blanco", modelo: "imperial", precio: 2500, stock: 7}, 
+     {id:7, mate: "cream", modelo: "camionero", precio: 2300, stock:18}, 
+     {id:8, mate: "negro", modelo: "imperial", precio: 2500, stock: 1}, 
+     {id:9, mate: "alpaca", modelo: "bombilla", precio: 1900, stock: 23}, 
+     {id:10, mate: "acero", modelo: "bombilla", precio: 1500, stock: 40},
 ];
 
 listaDeProductos.forEach((producto) => {
@@ -122,3 +121,19 @@ function eliminarProductos() {
   productosAgregados = [];
   console.log("Se han eliminado todos los productos");
 }
+
+let pintarHTML = () => { 
+     productosAgregados.forEach(producto => { 
+         if (producto.stock > 0) { 
+             let contenedor = document.createElement("div"); 
+             contenedor.setAttribute("id", producto.id); 
+             contenedor.innerHTML = `<h3> ${producto.mate}</h3> 
+                               <p> ${producto.modelo}</p> 
+                               <b> $${producto.precio}</b> 
+                             `; 
+             document.getElementById("div").appendChild(contenedor); 
+         } else { 
+             document.getElementById("div").innerHTML += `<p>Huy, justo ese no queda ${producto.mate}</p>` 
+         } 
+     }) 
+ }
