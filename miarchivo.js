@@ -28,8 +28,7 @@ let listaDeProductos = [
 ];
 
 listaDeProductos.forEach((producto) => {
-  let productoHtml = producto.mostrarProducto();
-  document.getElementById('productos').innerHTML += productoHtml;
+  producto.mostrarProducto();
 });
 
 let busquedaUsuario = prompt("¿Qué modelo queres buscar?");
