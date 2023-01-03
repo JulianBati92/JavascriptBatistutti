@@ -11,6 +11,7 @@ mostrarProducto() {
   console.log(
     `Este ${this.modelo} ${this.mate} y el precio es $${this.precio}`
   );
+ }
 }
 
 let listaDeProductos = [
