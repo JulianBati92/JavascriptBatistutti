@@ -3,12 +3,11 @@ const storage = window.localStorage;
 //Creo la clase Producto, con las propiedades id, nombre, precio y cantidad:
 
 class Producto {
-  constructor(id, nombre, precio, cantidad, imagen) {
+  constructor(id, nombre, precio, cantidad) {
     this.id = id;
     this.nombre = nombre;
     this.precio = precio;
     this.cantidad = cantidad;
-    this.imagen = imagen;
   }
 }
 
