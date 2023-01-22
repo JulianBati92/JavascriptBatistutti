@@ -1,4 +1,3 @@
-const storage = window.localStorage;
 
 class Producto {
   constructor(id, nombre, precio, cantidad, imagen) {
@@ -8,6 +7,14 @@ class Producto {
     this.cantidad = cantidad;
     this.imagen = imagen;
   }
+}
+
+const url ="./productos.json"
+
+function getProductos() {
+  return fetch(url)
+  .then(res => res.json())
+  .then(data => console.log(data))
 }
 
 function getProductosFromAPI() {
