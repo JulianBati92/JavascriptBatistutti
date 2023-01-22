@@ -1,111 +1,101 @@
 const storage = window.localStorage;
 
 class Producto {
-  constructor(mate, modelo, precio, stock) {
-    this.mate = mate;
-    this.modelo = modelo;
+  constructor(id, nombre, precio, cantidad, imagen) {
+    this.id = id;
+    this.nombre = nombre;
     this.precio = precio;
-    this.stock = stock;
+    this.cantidad = cantidad;
+    this.imagen = imagen;
+  }
+}
+
+function getProductosFromAPI() {
+  fetch("http://localhost:3000/productos")
+    .then((response) => {
+      return response.json();
+    })
+    .then((productos) => {
+      productos.forEach((producto) => {
+        let productoDiv = document.createElement("div");
+        productoDiv.innerHTML = `
+          <img src="${producto.imagen}" alt="${producto.nombre}">
+          <p>${producto.nombre}</p>
+          <p>$${producto.precio}</p>
+          <button class="btn btn-primary" id="agregarAlCarrito">Agregar al carrito</button>
+        `;
+        document.getElementById("contenedorProductos").appendChild(productoDiv);
+      });
+    });
+}
+
+getProductosFromAPI();
+
+
+document.getElementById("agregarAlCarrito").addEventListener("click", agregarAlCarrito);
+document.getElementById("verCarrito").addEventListener("click", verCarrito);
+document.getElementById("vaciarCarrito").addEventListener("click", vaciarCarrito);
+document.getElementById("finalizarCompra").addEventListener("click", finalizarCompra);
+
+let carrito = [];
+let totalCompra = 0;
+
+function crearDivProductos(productos) {
+  return productos.map((producto) => {
+    const divProducto = document.createElement('div');
+    divProducto.classList.add('card', 'col-xl-3', 'col-md-6', 'col-sm-12');
+    divProducto.innerHTML = `
+    <div>
+        <img src="img/${producto.id}.jpg" class="card-img-top img-fluid py-3">
+        <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">$ ${producto.precio}</p>
+            <button class="btn btn-primary" onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+        </div>
+    </div>`;
+    return divProducto;
+  });
+}
+
+function agregarAlCarrito(id) {
+  const producto = productosRecuperados.find(p => p.id === id);
+  if (producto.cantidad > 0) {
+    producto.cantidad -= 1;
+    carrito.push(producto);
+    total += producto.precio;
+    totalCompra.textContent = total;
+  } else {
+    alert("No hay mas stock de este Matteoli");
   }
 
-mostrarProducto() {
-  console.log(
-    `Este ${this.modelo} ${this.mate} y el precio es $${this.precio}`
-  );
-}
-}
 
-let listaDeProductos = [
-  {id:1, mate: "set completo", modelo: "set", precio: 1000, stock:3},
-  {id:2, mate: "plata 925 crem", modelo: "imperial", precio: 2850, stock: 8},
-  {id:3, mate: "plata 925 blanco", modelo: "imperial", precio: 2600, stock: 15},
-  {id:4, mate: "rosalia", modelo: "imperial", precio: 2500, stock:10},
-  {id:5, mate: "beige", modelo: "torpedo", precio: 2200, stock: 22},
-  {id:6, mate: "blanco", modelo: "imperial", precio: 2500, stock: 7},
-  {id:7, mate: "cream", modelo: "camionero", precio: 2300, stock:18},
-  {id:8, mate: "negro", modelo: "imperial", precio: 2500, stock: 1},
-  {id:9, mate: "alpaca", modelo: "bombilla", precio: 1900, stock: 23},
-  {id:10, mate: "acero", modelo: "bombilla", precio: 1500, stock: 40},
-];
-
-localStorage.setItem('listaDeProductos', JSON.stringify(listaDeProductos));
-
-listaDeProductos = JSON.parse(localStorage.getItem('listaDeProductos'));
-
-listaDeProductos.forEach((producto)=> {
-  console.log(`este ${producto.modelo} ${producto.mate} y el precio es $${producto.precio}`)
-})
-
-let busquedaUsuario = prompt("que modelo queres buscar?")
-const busqueda = listaDeProductos.find (producto => producto.modelo == busquedaUsuario);
-console.log (busqueda)
-
-let filtraPorPrecio = prompt("que precio?")
-const filtra = listaDeProductos.filter (producto => producto.precio > 1000);
-console.log (filtra)
-
-let crearProductos = () => {
-  let mate = document.querySelector("#mate").value;
-  let modelo = document.querySelector("#modelo").value;
-  let precio = parseInt(document.querySelector("#precio").value);
-
-  let mateNuevo = new Productos(mate, modelo, precio);
-  productosAgregados.push(mateNuevo);
-  mostrarProductos();
-}
-
-let productosAgregados = [];
-
-document.addEventListener("DOMContentLoaded", () => {
-  productosAgregados = JSON.parse(localStorage.getItem('productos')) || [];
-
-  let crearProductoBoton = document.getElementById("crearProductoBoton");
-  crearProductoBoton.addEventListener("click", (event) => {
-    event.preventDefault();
-    crearProducto();
-  });
-
-  let mostrarProductosBoton = document.getElementById("mostrarProductosBoton");
-  mostrarProductosBoton.addEventListener("click", mostrarProductos);
-
-  let eliminarProductosBoton = document.getElementById("eliminarProductosBoton");
-  eliminarProductosBoton.addEventListener("click", eliminarProductos);
+function mostrarCarrito() {
+contenedorCarrito.innerHTML = "";
+carrito.forEach((producto) => {
+    const divProducto = document.createElement('div');
+    divProducto.classList.add('card', 'col-xl-3', 'col-md-6', 'col-sm-12');
+    divProducto.innerHTML = `
+    <div>
+        <img src="img/${producto.id}.jpg" class="card-img-top img-fluid py-3">
+        <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">$ ${producto.precio}</p>
+            <button class="btn btn-danger" onclick="quitarDelCarrito(${producto.id})">Quitar del Carrito</button>
+        </div>
+    </div>`;
+    contenedorCarrito.appendChild(divProducto);
 });
-
-function crearProducto() {
-  let mateInput = document.getElementById("mate");
-  let modeloInput = document.getElementById("modelo");
-  let precioInput = document.getElementById("precio");
-
-  let nuevoProducto = new Producto(mateInput.value, modeloInput.value, precioInput.value);
-  productosAgregados.push(nuevoProducto);
-
-  localStorage.setItem('productos', JSON.stringify(productosAgregados));
-
-  console.log(productosAgregados);
 }
 
-function mostrarProductos() {
-  console.log(productosAgregados);
+function vaciarCarrito() {
+carrito = [];
+total = 0;
+totalCompra.innerHTML = total;
+mostrarCarrito();
 }
 
-function eliminarProductos() {
-  productosAgregados = [];
-  console.log("Se han eliminado todos los productos");
-}
-
-let pintarHTML = () => { 
-  productosAgregados.forEach(producto => { 
-      if (producto.stock > 0) { 
-          let contenedor = document.createElement("div"); 
-          contenedor.setAttribute("id", producto.id); 
-          contenedor.innerHTML = `<h3> ${producto.mate}</h3> 
-                            <p> ${producto.modelo}</p> 
-                            <b> $${producto.precio}</b> 
-                          `; 
-          document.getElementById("div").appendChild(contenedor); 
-      } else { 
-          document.getElementById("div").innerHTML += `<p>Huy, justo ese no queda ${producto.mate}</p>` 
-      } 
-  }) 
+function finalizarCompra() {
+  const carrito = JSON.parse(localStorage.getItem('carrito'));
+  localStorage.setItem('comprasRealizadas', JSON.stringify(carrito));
+  window.location.href = "compraRealizada.html";
 }
