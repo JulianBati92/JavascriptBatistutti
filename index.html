@@ -1,44 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idea - Batistutti</title>
-</head>
-<body>
-  <script src="./miarchivo.js"></script>
-  <div style="text-align: center;">
-      <h1 id="titulo">BIENVENIDO A TU MATTEOLI!!!</h1>
-  </div>
-  <br>
-  <div style="text-align: center;">
-    <div id="contenedor">
-      <form id="formulario" onsubmit="pintarHTML(); return false">
-        <label for="mate">Mate:</label>
-        <input type="text" id="mate" name="mate">
-        <br>
-        <label for="modelo">Modelo:</label>
-        <input type="text" id="modelo" name="modelo">
-        <br>
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio">
-        <br>
-        <input type="submit" value="Añadir producto" id="crearProductoBoton">
-      </form>
-      <button id="filtrarPrecio">Filtrar por precio</button>
-      <button id="buscarModelo">Buscar por modelo</button>
-      <button id="mostrarProductosBoton">Mostrar productos</button>
-      <button id="eliminarProductosBoton">Eliminar productos</button>
-    </div>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./img/mate.ico">
     
-  <div>
-      <div style="text-align: center;">
-          <h1>Copate con nuestros productos!!! Tenemos la mayor variedad de mates, termos y bombillas. Descubre y explora nuestras categorías de productos y elegí el combo matero ideal para vos!</h1>
-      </div>    
-  </div>
-  <div style="text-align: center;">
-      <p class="parrafo">“No dejes para mañana los mates que puedas tomar hoy”</p>
-  </div>
-</body>
+    <title>Proyecto Final - Batistutti</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="container">
+    <h1>Tu Matteoli</h1>
+    <h2>Nuestros Productos:</h2>
+    <div class="row" id="contenedorProductos"></div>
+
+    <h2>Carrito de Compras:</h2>
+    <button class="btn btn-primary" id="verCarrito">Ver Carrito</button>
+    <button class="btn btn-primary" id="vaciarCarrito">Vaciar Carrito</button>
+    <button class="btn btn-success" id="finalizarCompra">Finalizar Compra</button>
+    
+    <h3>Total gastado: <span id="totalCompra">0</span></h3>
+    <div class="row py-3" id="contenedorCarrito"></div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <script src="miarchivo.js"></script>
+  </body>
 </html>
+
